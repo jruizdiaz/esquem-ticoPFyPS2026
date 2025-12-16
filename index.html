@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final y Prácticas Profesionales Situadas - TUCEMD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .stat-item span {
+            display: block;
+            font-size: 1.5em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-tabs button {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-tabs button:hover {
+            background: #f0f0ff;
+        }
+
+        .nav-tabs button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .context-section {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .context-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .bloques-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .bloque-card {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .bloque-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .bloque-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .bloque-header h3 {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+
+        .semanas-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .actividades-list {
+            list-style: none;
+        }
+
+        .actividades-list li {
+            padding: 12px;
+            margin: 10px 0;
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .actividades-list li:hover {
+            background: #e8ebff;
+            transform: translateX(5px);
+        }
+
+        .entregable-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .entregable-final {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .hito-corte {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .roles-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .role-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .role-card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .role-card ul {
+            list-style: none;
+        }
+
+        .role-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .role-card li:last-child {
+            border-bottom: none;
+        }
+
+        .evaluacion-section {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .evaluacion-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .ponderacion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .pond-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .pond-item strong {
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .herramientas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .herramienta-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .herramienta-item:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .bloques-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Proyecto Final y Prácticas Profesionales Supervisadas</h1>
+            <p class="subtitle">Tecnicatura Universitaria en Comercio Electrónico y Marketing Digital</p>
+            <p style="color: #666; font-style: italic;">Modelo de empresa simulada y agencia digital</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span>300</span>
+                    Estudiantes
+                </div>
+                <div class="stat-item">
+                    <span>15</span>
+                    Semanas
+                </div>
+                <div class="stat-item">
+                    <span>2</span>
+                    Titulares
+                </div>
+                <div class="stat-item">
+                    <span>4</span>
+                    Adjuntos
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="active" onclick="showTab('contexto')">📋 Contexto</button>
+            <button onclick="showTab('proyecto-final')">🎯 Proyecto Final</button>
+            <button onclick="showTab('practicas')">💼 Prácticas Supervisadas</button>
+            <button onclick="showTab('gestion')">👥 Gestión Docente</button>
+            <button onclick="showTab('evaluacion')">📊 Evaluación</button>
+            <button onclick="showTab('herramientas')">🔧 Herramientas</button>
+        </div>
+
+        <!-- Tab: Contexto -->
+        <div id="contexto" class="tab-content active">
+            <div class="context-section">
+                <h2>📖 Contexto General del Proyecto</h2>
+                <p style="margin-bottom: 15px;">El tramo final de la Tecnicatura se organiza en dos asignaturas secuenciales de 15 semanas en total:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 10px; border: 3px solid #667eea;">
+                        <h3 style="color: #667eea; margin-bottom: 15px;">Bloque 1 · Proyecto Final</h3>
+                        <p style="font-weight: bold; margin-bottom: 10px;">Semanas 1–8</p>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="padding: 5px 0;">✓ Incubación y estrategia</li>
+                            <li style="padding: 5px 0;">✓ Setup tecnológico</li>
+                            <li style="padding: 5px 0;">✓ E-commerce funcional</li>
+                        </ul>
+                        <div class="hito-corte" style="margin-top: 15px;">
+                            🎯 Hito: Documento completo Proyecto Final<br>(según consideraciones de profesores)
+                        </div>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; border: 3px solid #764ba2;">
+                        <h3 style="color: #764ba2; margin-bottom: 15px;">Bloque 2 · Prácticas Supervisadas</h3>
+                        <p style="font-weight: bold; margin-bottom: 10px;">Semanas 9–15</p>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li style="padding: 5px 0;">✓ Simulación empresarial</li>
+                            <li style="padding: 5px 0;">✓ Gestión de crisis</li>
+                            <li style="padding: 5px 0;">✓ Defensa de resultados</li>
+                        </ul>
+                        <div class="entregable-final" style="margin-top: 15px;">
+                            🎓 Hito Final: Defensa de resultados<br>(Semanas 14 y 15)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Proyecto Final -->
+        <div id="proyecto-final" class="tab-content">
+            <h2 style="color: #667eea; margin-bottom: 25px; text-align: center;">🎯 Proyecto Final (Semanas 1-8)</h2>
+            
+            <div class="bloques-grid">
+                <!-- Semana 1 y 2 -->
+                <div class="bloque-card">
+                    <div class="bloque-header">
+                        <h3>Semana 1 y 2</h3>
+                        <div class="semanas-badge">Diagnóstico y Estrategia</div>
+                    </div>
+                    <ul class="actividades-list">
+                        <li>📋 Constitución de agencias, acta y presentación de rubros</li>
+                        <li>🔍 Diagnóstico del negocio y benchmark de e-commerce</li>
+                        <li>📈 Dimensión del mercado y principales competidores</li>
+                        <li>💰 Presupuesto anual</li>
+                        <li>📊 Márgenes y punto de equilibrio</li>
+                        <li>💹 ROI esperado</li>
+                    </ul>
+                    <div class="entregable-box">
+                        📤 Entregable 1 (Semana 2):<br>
+                        Plantilla Modelo Empresa Propuesta 1
+                    </div>
+                    <div style="margin-top: 10px; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 5px; font-size: 0.9em;">
+                        ⚠️ <strong>Nota:</strong> Director sugiere incluir dimensión del mercado (Tamsamson), 3 principales competidores, país y años proyectados. Parámetros económico-financieros: presupuesto anual, ingreso proyectado, margen bruto, margen neto, costos totales, punto de equilibrio y ROI esperado.
+                    </div>
+                </div>
+
+                <!-- Semana 3 y 4 -->
+                <div class="bloque-card">
+                    <div class="bloque-header">
+                        <h3>Semana 3 y 4</h3>
+                        <div class="semanas-badge">Identidad y UX</div>
+                    </div>
+                    <ul class="actividades-list">
+                        <li>🎨 Identidad de marca</li>
+                        <li>👤 Buyer persona</li>
+                        <li>🗺️ Customer Journey</li>
+                        <li>🏗️ Arquitectura de información y wireframes</li>
+                    </ul>
+                    <div class="entregable-box">
+                        📤 Entregable 2 (Semana 3):<br>
+                        Plantilla Modelo Empresa Propuesta 2
+                    </div>
+                    <div style="margin-top: 10px; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 5px; font-size: 0.9em;">
+                        ⚠️ <strong>Inconsistencia:</strong> Director propone entregable parcial en Semana 4 con proyecto económico-financiero y punto de "go o no go". Actualmente está programado para Semana 3.
+                    </div>
+                </div>
+
+                <!-- Semana 5 y 6 -->
+                <div class="bloque-card">
+                    <div class="bloque-header">
+                        <h3>Semana 5 y 6</h3>
+                        <div class="semanas-badge">Setup Técnico</div>
+                    </div>
+                    <ul class="actividades-list">
+                        <li>✅ Go/NO Go (en base a Entregable 2)</li>
+                        <li>⚙️ Setup del CMS y sitio en modo ensayo</li>
+                        <li>📝 Contenidos, catálogo y SEO on-page</li>
+                    </ul>
+                    <div style="margin-top: 10px; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 5px; font-size: 0.9em;">
+                        ⚠️ <strong>Inconsistencia:</strong> Go/No Go programado para Semana 5, pero Director propone que sea en Semana 4 basado en proyecto económico-financiero.
+                    </div>
+                </div>
+
+                <!-- Semana 7 y 8 -->
+                <div class="bloque-card">
+                    <div class="bloque-header">
+                        <h3>Semana 7 y 8</h3>
+                        <div class="semanas-badge">Medición y Lanzamiento</div>
+                    </div>
+                    <ul class="actividades-list">
+                        <li>📊 Configuración de medición</li>
+                        <li>📱 Plan de medios digital</li>
+                        <li>📄 Documento técnico del CMS</li>
+                    </ul>
+                    <div class="entregable-box hito-corte">
+                        🎯 HITO DE CORTE (Semana 8):<br>
+                        <strong>Documento completo del Proyecto Final</strong><br>
+                        Según consideraciones y objetivos indicados por los profesores
+                    </div>
+                    <div style="margin-top: 10px; padding: 10px; background: #d1ecf1; border-left: 4px solid #17a2b8; border-radius: 5px; font-size: 0.9em;">
+                        ✅ <strong>Coherente:</strong> Director confirma Semana 8 como clase de entrega y revisión final con titulares. Incluye configuración de medición (G4 al CMS).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Prácticas Supervisadas -->
+        <div id="practicas" class="tab-content">
+            <h2 style="color: #764ba2; margin-bottom: 25px; text-align: center;">💼 Prácticas Profesionales Supervisadas (Semanas 9-15)</h2>
+            
+            <div class="context-section">
+                <p style="margin-bottom: 15px;"><strong>Enfoque:</strong> Simulación empresarial con gestión de crisis y defensa de resultados</p>
+                <p><strong>Nota:</strong> El acceso a las semanas 9-15 se habilita solo si se aprueba el hito de corte (Documento completo del Proyecto Final)</p>
+            </div>
+
+            <div class="bloques-grid">
+                <!-- Bloque 1: Semanas 9-10 -->
+                <div class="bloque-card">
+                    <div class="bloque-header" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+                        <h3>Bloque 1</h3>
+                        <div class="semanas-badge">Semana 9 y 10</div>
+                    </div>
+                    <ul class="actividades-list">
+                        <li>📊 Plan de Marketing y Plan de Medios</li>
+                        <li>🛒 Entrega del CMS Operativo</li>
+                        <li>⚠️ Crisis 1</li>
+                    </ul>
+                    <div class="entregable-box">
+                        📤 Entregable (Semana 11):<br>
+                        Gestión de Crisis 1
+                    </div>
+                    <div style="margin-top: 10px; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 5px; font-size: 0.9em;">
+                        ⚠️ <strong>Inconsistencia:</strong> Director indica Crisis 1 en Semana 10 con clínica de apoyo (salas separadas: técnico, negocio/marketing, gestión). Actualmente no especifica timing exacto ni clínica.
+                    </div>
+                </div>
+
+                <!-- Bloque 2: Semanas 12-13 -->
+                <div class="bloque-card">
+                    <div class="bloque-header" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+                        <h3>Bloque 2</h3>
+                        <div class="semanas-badge">Semana 12 y 13</div>
+                    </div>
+                    <ul class="actividades-list">
+                        <li>🔍 Revisión de entregable semana 11</li>
+                        <li>⚠️ Crisis 2</li>
+                        <li>📋 Gestión de Crisis 2</li>
+                    </ul>
+                    <div class="entregable-box">
+                        📤 Entregable (Semana 12 y 13):<br>
+                        Gestión de Crisis 2
+                    </div>
+                    <div style="margin-top: 10px; padding: 10px; background: #d1ecf1; border-left: 4px solid #17a2b8; border-radius: 5px; font-size: 0.9em;">
+                        ✅ <strong>Coherente:</strong> Director confirma Semana 12 para segunda crisis y Semana 13 para entrega de solución.
+                    </div>
+                </div>
+
+                <!-- Bloque 3: Semana 13 -->
+                <div class="bloque-card">
+                    <div class="bloque-header" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+                        <h3>Bloque 3</h3>
+                        <div class="semanas-badge">Semana 13</div>
+                    </div>
+                    <ul class="actividades-list">
+                        <li>📄 Preparación de entrega final</li>
+                        <li>📋 Documentación completa del proyecto</li>
+                    </ul>
+                    <div class="entregable-box entregable-final">
+                        🎯 Entrega Final (Semana 13):<br>
+                        Para defensa en semana 14 y 15
+                    </div>
+                </div>
+
+                <!-- Bloque 4: Semanas 14-15 -->
+                <div class="bloque-card">
+                    <div class="bloque-header" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+                        <h3>Bloque 4</h3>
+                        <div class="semanas-badge">Semana 14 y 15</div>
+                    </div>
+                    <ul class="actividades-list">
+                        <li>🎤 Semana 14: Defiende Resultado 1</li>
+                        <li>🎤 Semana 15: Defiende Resultado 2</li>
+                    </ul>
+                    <div class="entregable-box entregable-final">
+                        🎓 Cierre del Proyecto:<br>
+                        Defensa completa de resultados
+                    </div>
+                    <div style="margin-top: 10px; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 5px; font-size: 0.9em;">
+                        ⚠️ <strong>Inconsistencia:</strong> Director menciona Semana 16 para defensa final y review. Actualmente termina en Semana 15.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Gestión Docente -->
+        <div id="gestion" class="tab-content">
+            <h2 style="color: #667eea; margin-bottom: 25px; text-align: center;">👥 Modelo de Gestión Docente</h2>
+            
+            <div class="roles-section">
+                <div class="role-card">
+                    <h4>🏢 Profesores Titulares (2)</h4>
+                    <p style="margin-bottom: 15px; color: #666;"><strong>Rol:</strong> Central Digital & Algoritmo</p>
+                    <ul>
+                        <li>✓ Definen estándares y plantillas</li>
+                        <li>✓ Publican el Brief Maestro</li>
+                        <li>✓ Validan briefs de agencias</li>
+                        <li>✓ Actúan como Registro Mercantil (Bloque 1)</li>
+                        <li>✓ Simulan Mercado/Algoritmo (Bloque 2)</li>
+                        <li>✓ Inyectan crisis y cambios de contexto</li>
+                    </ul>
+                </div>
+
+                <div class="role-card">
+                    <h4>👔 Profesores Adjuntos (4)</h4>
+                    <p style="margin-bottom: 15px; color: #666;"><strong>Rol:</strong> Directores de Cuentas</p>
+                        <ul>
+                            <li>✓ Gestionan "cámara" de 75 estudiantes</li>
+                            <li>✓ Acompañan conformación de agencias</li>
+                            <li>✓ Seguimiento semanal en Moodle</li>
+                            <li>✓ Detectan riesgos y estudiantes "polizones"</li>
+                            <li>✓ Asignan "semáforo" a cada agencia</li>
+                            <li>✓ Escalan problemas a Central Digital</li>
+                        </ul>
+                </div>
+            </div>
+
+            <div class="evaluacion-section">
+                <h3>📅 Rutina Semanal de Seguimiento</h3>
+                <div style="margin-top: 20px;">
+                    <div class="actividades-list">
+                        <li><strong>Antes de la semana:</strong> Central Digital publica objetivos y recursos. Adjuntos revisan panel de finalización.</li>
+                        <li><strong>Durante la semana:</strong> Foro "Pizarra de Agencia" con evidencias, tareas de validación de herramientas, registro de KPIs.</li>
+                        <li><strong>Cierre de semana:</strong> Adjunto asigna semáforo a cada agencia y reporta hallazgos.</li>
+                    </div>
+                </div>
+            </div>
+
+            <div class="context-section" style="margin-top: 30px;">
+                <h3>📅 Cronograma Completo de Entregas</h3>
+                
+                <h4 style="color: #667eea; margin-top: 20px; margin-bottom: 10px;">Proyecto Final (Semanas 1-8)</h4>
+                <div style="margin-top: 15px;">
+                    <div class="actividades-list">
+                        <li><strong>Semana 2:</strong> Entregable 1 - Plantilla Modelo Empresa Propuesta 1 (diagnóstico, mercado, competidores, parámetros económico-financieros)</li>
+                        <li><strong>Semana 3:</strong> Entregable 2 - Plantilla Modelo Empresa Propuesta 2 (identidad de marca, buyer persona, customer journey, wireframes)</li>
+                        <li><strong>Semana 8:</strong> HITO DE CORTE - Documento completo del Proyecto Final según consideraciones de profesores</li>
+                    </div>
+                </div>
+
+                <h4 style="color: #764ba2; margin-top: 25px; margin-bottom: 10px;">Prácticas Supervisadas (Semanas 9-15)</h4>
+                <div style="margin-top: 15px;">
+                    <div class="actividades-list">
+                        <li><strong>Semana 9:</strong> Plan de Marketing, Plan de Medios y CMS Operativo</li>
+                        <li><strong>Semana 11:</strong> Gestión de Crisis 1</li>
+                        <li><strong>Semana 12 y 13:</strong> Gestión de Crisis 2</li>
+                        <li><strong>Semana 13:</strong> Entrega Final para defensa</li>
+                        <li><strong>Semana 14:</strong> Defensa de Resultado 1</li>
+                        <li><strong>Semana 15:</strong> Defensa de Resultado 2</li>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Evaluación -->
+        <div id="evaluacion" class="tab-content">
+            <h2 style="color: #667eea; margin-bottom: 25px; text-align: center;">📊 Estrategia de Evaluación</h2>
+            
+            <div class="evaluacion-section">
+                <h3>⚖️ Ponderación</h3>
+                <div class="ponderacion-grid">
+                    <div class="pond-item">
+                        <strong>Proyecto Final</strong><br>
+                        <div style="margin-top: 10px;">
+                            • 60% Trabajo grupal<br>
+                            • 40% Desempeño individual
+                        </div>
+                    </div>
+                    <div class="pond-item">
+                        <strong>Prácticas Supervisadas</strong><br>
+                        <div style="margin-top: 10px;">
+                            • 50% Trabajo grupal<br>
+                            • 50% Desempeño individual
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="evaluacion-section">
+                <h3>🎯 Rúbricas de Evaluación</h3>
+                <ul class="actividades-list">
+                    <li><strong>Activo Digital Listo:</strong> Calidad del sitio y coherencia de marca</li>
+                    <li><strong>Informe de rendimiento:</strong> Lectura de datos y decisiones estratégicas</li>
+                    <li><strong>Dashboard:</strong> Visualización y análisis de KPIs</li>
+                </ul>
+                <div style="margin-top: 10px; padding: 10px; background: #d1ecf1; border-left: 4px solid #17a2b8; border-radius: 5px; font-size: 0.9em;">
+                    ✅ <strong>Coherente:</strong> Director confirma que no hay parciales, solo entregas y defensas. Si grupo se disuelve, alumno puede entregar individualmente para "salvar la materia" (nota 4).
+                </div>
+            </div>
+
+            <div class="evaluacion-section">
+                <h3>🛡️ Control del Trabajo Individual (Anti-Polizón)</h3>
+                <div class="roles-section">
+                    <div class="role-card">
+                        <h4>📔 Bitácora Semanal</h4>
+                        <p>Registro individual en Moodle de actividades y aprendizajes (16 entradas)</p>
+                    </div>
+                    <div class="role-card">
+                        <h4>📋 Tableros de Gestión</h4>
+                        <p>Cada estudiante debe tener tareas asignadas y con seguimiento visible en Trello/Asana</p>
+                    </div>
+                    <div class="role-card">
+                        <h4>👥 Evaluación entre Pares</h4>
+                        <p>Autoevaluación y coevaluación al cierre de cada bloque ajustan la nota individual</p>
+                    </div>
+                    <div class="role-card">
+                        <h4>⚠️ Alertas Tempranas</h4>
+                        <p>Adjuntos documentan casos de baja participación para intervención</p>
+                    </div>
+                </div>
+                <div style="margin-top: 20px; padding: 15px; background: #d1ecf1; border-left: 4px solid #17a2b8; border-radius: 5px;">
+                    ✅ <strong>Recuperatorios:</strong> Director establece que si no se aprueba en cursada, hay instancias de defensa/recupero en diciembre y febrero. Solo recursaría la materia si falla en ambas instancias.
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Herramientas -->
+        <div id="herramientas" class="tab-content">
+            <h2 style="color: #667eea; margin-bottom: 25px; text-align: center;">🔧 Herramientas Integradas</h2>
+            
+            <div class="context-section">
+                <p style="margin-bottom: 20px;">El proyecto integra herramientas profesionales del ecosistema digital, con evidencias y entregables gestionados desde Moodle:</p>
+                
+                <div class="herramientas-grid">
+                    <div class="herramienta-item">📊 Google Analytics</div>
+                    <div class="herramienta-item">📱 Meta Business Suite</div>
+                    <div class="herramienta-item">🎨 Canva</div>
+                    <div class="herramienta-item">📋 Trello / Asana</div>
+                    <div class="herramienta-item">🛒 WordPress / Shopify</div>
+                    <div class="herramienta-item">📧 Moodle</div>
+                </div>
+            </div>
+
+            <div class="evaluacion-section">
+                <h3>📦 Integración en Moodle</h3>
+                <div class="actividades-list">
+                    <li><strong>Trello/Asana:</strong> Tareas donde se entrega enlace público al tablero con cronograma y roles</li>
+                    <li><strong>Google Analytics/Meta:</strong> Tareas de capturas + interpretación, base de datos de KPIs semanales</li>
+                    <li><strong>Canva:</strong> Entrega de creatividades vía enlaces de solo lectura</li>
+                    <li><strong>Looker Studio:</strong> Dashboard borrador y final basados en datasets simulados</li>
+                    <li><strong>CMS:</strong> Foros de demo y entrega de URL + video de flujo de compra</li>
+                </ul>
+            </div>
+
+            <div class="evaluacion-section">
+                <h3>📚 Arquitectura Moodle</h3>
+                <p style="margin-bottom: 15px;">Curso único en formato por temas con 15 semanas:</p>
+                <div class="roles-section">
+                    <div class="role-card">
+                        <h4>🏠 Secciones Globales</h4>
+                        <ul>
+                            <li>Programa y bienvenida</li>
+                            <li>Guía de roles</li>
+                            <li>Biblioteca de plantillas</li>
+                            <li>Central de simulación/Mercado</li>
+                        </ul>
+                    </div>
+                    <div class="role-card">
+                        <h4>📅 Bloques Semanales</h4>
+                        <ul>
+                            <li>Semanas 1-8: Proyecto Final</li>
+                            <li>Semana 8: Hito de corte</li>
+                            <li>Semanas 9-15: Prácticas Supervisadas</li>
+                            <li>Restricción de acceso condicional</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px solid #e0e0e0; color: #666;">
+            <p>Diseño instruccional para Proyecto Final y Prácticas Profesionales Situadas · TUCEMD</p>
+            <p style="margin-top: 10px; font-style: italic;">Diseñado por Mg.Lic. Juan Ruíz Díaz</p>
+
+    <script>
+        function showTab(tabName) {
+            // Ocultar todos los contenidos
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Desactivar todos los botones
+            const buttons = document.querySelectorAll('.nav-tabs button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Mostrar el contenido seleccionado
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activar el botón correspondiente
+            event.target.classList.add('active');
+        }
+    </script>
